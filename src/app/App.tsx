@@ -3,31 +3,35 @@ import "styles/global.css";
 import { QueryClientProvider } from "react-query";
 
 import { queryClient } from "./services";
-import Login from "../pages/login";
+import { apolloClient } from "./services";
+import Login from "../pages/login2";
 import { Redirect } from "react-router";
 import ProtectedRoute, { PrivateRoute } from "../utils/protectedRoute";
 import { Switch } from "react-router-dom";
-import Todo from "../pages/todo";
+import Todo from "../pages/todo2";
 import SignUp from "../pages/signup";
+import { ApolloProvider } from '@apollo/client';
 
 function App(): JSX.Element {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="App">
-        <Switch>
-          <PrivateRoute exact path="/register">
-            <SignUp />
-          </PrivateRoute>
-          <PrivateRoute exact path="/login">
-            <Login />
-          </PrivateRoute>
-          <ProtectedRoute exact path="/">
-            <Todo />
-          </ProtectedRoute>
-          <Redirect to="/" />
-        </Switch>
-      </div>
-    </QueryClientProvider>
+    <ApolloProvider client={apolloClient}>
+      <QueryClientProvider client={queryClient}>
+        <div className="App">
+          <Switch>
+            <PrivateRoute exact path="/register">
+              <SignUp />
+            </PrivateRoute>
+            <PrivateRoute exact path="/login">
+              <Login />
+            </PrivateRoute>
+            <ProtectedRoute exact path="/">
+              <Todo />
+            </ProtectedRoute>
+            <Redirect to="/" />
+          </Switch>
+        </div>
+      </QueryClientProvider>
+    </ApolloProvider>
   );
 }
 
