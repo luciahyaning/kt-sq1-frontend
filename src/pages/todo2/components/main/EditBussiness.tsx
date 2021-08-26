@@ -48,6 +48,9 @@ export const EditBussiness = ({ selectedItem }) => {
               name: name,
               tag: tag
             }
+          }).catch(e => {
+            console.log(e);
+            console.log(e.message);
           });
           setName("");
           setTag("");

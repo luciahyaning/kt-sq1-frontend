@@ -7,7 +7,7 @@ import { EditBussiness } from "./EditBussiness";
 export const Main: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState({});
   const onSelectedItem = (item) => {
-    console.log(item);
+    // console.log(item);
     setSelectedItem(item)
   };
   return (
@@ -16,7 +16,7 @@ export const Main: React.FC = () => {
       <Container>
         <Row>
           <Col>
-            <InputBussiness />
+            <InputBussiness /> 
           </Col>
           <Col>
             <EditBussiness selectedItem={selectedItem} />

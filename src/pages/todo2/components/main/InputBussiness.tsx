@@ -47,6 +47,9 @@ export const InputBussiness = () => {
               name: name,
               tag: tag
             }
+          }).catch(e => {
+            console.log(e);
+            console.log(e.message);
           });
           setName("");
           setTag("");
