@@ -13,7 +13,6 @@ export const EditDriver = (
   }
 ) => {
   const alert = useAlert();
-
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [id, setId] = useState("");

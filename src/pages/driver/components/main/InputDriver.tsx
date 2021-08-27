@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {Alert, Button, FormGroup, FormText, Input, Label} from "reactstrap";
 import {useAlert} from "react-alert";
-import {UPDATE_DRIVERS} from "../../api/query";
 import {useMutation,} from "@apollo/client";
+import {insertDriver} from "../../api/query";
 
 export const InputDriver = (
     {
@@ -11,23 +11,24 @@ export const InputDriver = (
 ) => {
     const alert = useAlert();
 
-    const [licenseNumber, setLicenseNumber] = useState("");
     const [payload, setPayload] = useState({
         driverName: null, phoneNumber: null
     });
-    const [addTruck, {data, loading, error}] = useMutation(UPDATE_DRIVERS, {
+    const [addTruck, {data, loading, error}] = useMutation(insertDriver(payload), {
         errorPolicy: 'all'
     });
 
 
+    console.log(data)
+
     useEffect(() => {
-        if (data && data.createBussiness) {
-            alert.success("Input Success");
-            setLicenseNumber("");
-            // setTruckType("");
-            // setPlateType("");
-            onSubmit();
-        }
+        // if (data && data.createBussiness) {
+        //     alert.success("Input Success");
+        //     setLicenseNumber("");
+        //     setTruckType("");
+        //     setPlateType("");
+        //     onSubmit();
+        // }
     }, [data]);
 
     return (
@@ -47,11 +48,10 @@ export const InputDriver = (
             {/* <form
                 onSubmit={e => {
                     e.preventDefault();
+                    onSubmit()
                     addTruck({
                         variables: {
-                            name: licenseNumber,
-                            description: plateType,
-                            tag: truckType
+                            input: payload
                         }
                     })
                         .catch(e => {
@@ -62,16 +62,16 @@ export const InputDriver = (
             >
                 <label>Driver Name</label>
                 <Input
-                    value={licenseNumber}
+                    value={payload.driverName}
                     name="licenseNumber"
-                    onChange={(e) => setLicenseNumber(e.target.value)}
+                    onChange={(e) => setPayload({...payload, driverName: e.target.value})}
                 />
                 <br/>
                 <label>Phone Number</label>
                 <Input
-                    value={plateType}
+                    value={payload.phoneNumber}
                     name="plateType"
-                    onChange={(e) => setPlateType(e.target.value)}
+                    onChange={(e) => setPayload({...payload, phoneNumber: e.target.value})}
                 />
                 <br/>
                 <label>ID Card</label>
