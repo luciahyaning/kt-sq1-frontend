@@ -3,6 +3,7 @@ import { Button, Container, Form, InputGroup } from "react-bootstrap";
 // import { useMutation } from "react-query";
 import { useAlert } from "react-alert";
 import { LOGIN } from "../../api/query";
+import { Redirect } from "react-router";
 
 import { useMutation } from "@apollo/client";
 import { LoginPayload } from "../../../login/interface/loginPayload";
@@ -19,11 +20,27 @@ export const Main: React.FC = () => {
   });
   const [role, setRole] = useState<number>(0);
 
-  if (data && data.loginUser) {
-    localStorage.setItem("token", data.loginUser.token);
+  // if (data && data.loginUser) {
+  //   localStorage.setItem("token", data.loginUser.token);
+  //   alert.success("Successfully Login");
+  //   window.location.href = "/";
+  // }
+
+  const doLogin = () => {
     alert.success("Successfully Login");
-    window.location.href = "/";
+    if (role)
+      localStorage.setItem("role", role.toString());
+
+    if (role == 1) {
+      window.location.href = "http://localhost:3000/transporter/trucks";
+      // return <Redirect to={{ pathname: "/transporter/trucks" }} />;
+    }
+    else if (role == 2) {
+      // return <Redirect to={{ pathname: "login" }} />;
+      window.location.href = "http://localhost:3000/transporter/trucks";
+    }
   }
+
   return (
     <>
       {error && error.message}
@@ -59,7 +76,7 @@ export const Main: React.FC = () => {
                   <InputGroup.Radio
                     checked={checked.shipper}
                     onClick={() => {
-                      setRole(0);
+                      setRole(2);
                       setChecked({
                         shipper: true,
                         transporter: false,
@@ -76,11 +93,12 @@ export const Main: React.FC = () => {
                     type="submit"
                     className="btn btn-primary btn-block mt-4"
                     onClick={() => {
-                      login({
-                        variables: {
-                          role: role,
-                        },
-                      });
+                      doLogin();
+                      // login({
+                      //   variables: {
+                      //     role: role,
+                      //   },
+                      // });
                     }}
                   >
                     {" "}

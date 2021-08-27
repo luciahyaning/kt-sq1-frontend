@@ -23,7 +23,13 @@ export const getUserFromToken = () => {
 
 //util for check if user have token
 export const isAuthenticated = () => {
-  return !localStorage.getItem("token")
-    ? false
-    : localStorage.getItem("token").length > 0;
+  return localStorage.getItem("role")
 };
+
+
+// //util for check if user have token
+// export const isAuthenticated = () => {
+//   return localStorage.getItem("token")
+//     ? false
+//     : localStorage.getItem("token").length > 0;
+// };
