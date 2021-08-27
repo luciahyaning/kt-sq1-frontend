@@ -11,6 +11,7 @@ import TransporterTrucks from "../pages/transporterTrucks";
 import SignUp from "../pages/signup";
 import {ApolloProvider} from '@apollo/client';
 import Login from "../pages/login";
+import Driver from "../pages/driver";
 
 function App(): JSX.Element {
   return (
@@ -29,6 +30,9 @@ function App(): JSX.Element {
             </ProtectedRoute>
             <ProtectedRoute exact path="/transporter/trucks">
               <TransporterTrucks />
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/transporter/drivers">
+              <Driver />
             </ProtectedRoute>
             <Redirect to="/" />
           </Switch>
