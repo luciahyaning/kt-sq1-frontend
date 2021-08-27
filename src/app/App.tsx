@@ -30,7 +30,7 @@ function App(): JSX.Element {
             <ProtectedRoute exact path="/">
               {
                 role == 1 && 
-                <Redirect to={{ pathname: "/transporter/trucks" }} />
+                <Redirect to={{ pathname: "/transporter/drivers" }} />
               }
               {
                 role == 2 && 
