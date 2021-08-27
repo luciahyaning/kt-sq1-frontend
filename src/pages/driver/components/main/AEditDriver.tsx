@@ -16,29 +16,22 @@ export const EditDriver = (
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [id, setId] = useState("");
-
-  const [payload, setPayload] = useState({
-    id: 1, driverName: null, phoneNumber: null
-});
-
-  const [editDriver, { data, loading, error }] = useMutation(updateTruck(payload), {
+  const [editDriver, { data, loading, error }] = useMutation(UPDATE_DRIVERS, {
     errorPolicy: 'all'
   });
 
   useEffect(() => {
     if (selectedItem) {
-      setPayload({
-        driverName: selectedItem.name,
-        phoneNumber: selectedItem.phoneNumber,
-        id: selectedItem.id,
-      })
+      setName(selectedItem.name);
+      setPhoneNumber(selectedItem.phoneNumber);
+      setId(selectedItem.id);
     }
   }, [selectedItem]);
 
   useEffect(() => {
     if (data && data.updateDriver) {
-      onSubmit()
       alert.success("Edit Success");
+      onSubmit();
       setName("");
       setPhoneNumber("");
       setPhoneNumber("");
@@ -67,8 +60,10 @@ export const EditDriver = (
           console.log(id);
           editDriver({
             variables: {
-              input: payload
-          }
+              id: id,
+              name: name,
+              phoneNumber: phoneNumber,
+            }
           })
             .catch(e => {
               console.log(e);
@@ -78,16 +73,16 @@ export const EditDriver = (
       >
         <label>Name</label>
         <Input
-          value={payload.driverName}
+          value={name}
           name="licenseNumber"
-          onChange={(e) => setPayload({...payload, driverName: e.target.value})}
+          onChange={(e) => setName(e.target.value)}
         />
         <br />
         <label>Phone Number</label>
         <Input
-          value={payload.phoneNumber}
+          value={phoneNumber}
           name="plateType"
-          onChange={(e) => setPayload({...payload, phoneNumber: e.target.value})}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <br />
         <Button type="submit">Save</Button>

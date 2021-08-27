@@ -13,7 +13,7 @@ query {
 `;
 
 export const UPDATE_DRIVERS = gql`
-mutation updateDriver( $id: String!, $name: String!, $phoneNumber: String!) {
+mutation updateDriver( $name: String!, $phoneNumber: String!) {
     updateDriver( id: "1", input: {name: $name, phoneNumber: $phoneNumber}) {
         id,
         idCard,
@@ -24,11 +24,11 @@ mutation updateDriver( $id: String!, $name: String!, $phoneNumber: String!) {
   }
 `;
 
-export const updateTruck = (id: string, name: string, phoneNumber: string) => {
+export const updateTruck = ({id, driverName, phoneNumber}: any) => {
     return (
         gql`
   mutation {
-    updateDriver( id:  ${id}, input: {name: ${name}, phoneNumber:${phoneNumber}}) {
+    updateDriver( id: ${String(''+id+'')}, input: {name: ${String('"'+driverName+'"')}, phoneNumber:${String('"'+phoneNumber+'"')}}) {
         id,
         idCard,
         status,
