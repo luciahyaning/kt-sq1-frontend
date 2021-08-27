@@ -51,8 +51,8 @@ export const InputTrucks = (
           addTruck({
             variables: {
               name: licenseNumber,
-              description: truckType,
-              tag: plateType
+              description: plateType ,
+              tag: truckType
             }
           })
             .catch(e => {
@@ -68,22 +68,22 @@ export const InputTrucks = (
           onChange={(e) => setLicenseNumber(e.target.value)}
         />
         <br />
-        <label>Truck Type</label>
-        <Input
-          value={truckType}
-          name="description"
-          onChange={(e) => setTruckType(e.target.value)}
-        />
-        <br />
         <label>Plate Type</label>
         <Input
-          type="select"
           value={plateType}
           name="plateType"
           onChange={(e) => setPlateType(e.target.value)}
+        />
+        <br />
+        <label>Truck Type</label>
+        <Input
+          type="select"
+          value={truckType}
+          name="truckType"
+          onChange={(e) => setTruckType(e.target.value)}
         >
           <option key="0" value="">
-            - Choose Plate Type -
+            - Choose Truck Type -
           </option>
           <option key={1} value="yellow">
             Yellow
