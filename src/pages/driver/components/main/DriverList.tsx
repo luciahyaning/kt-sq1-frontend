@@ -35,36 +35,7 @@ export const DriverList = (
 
     return (
         <>
-            <Row>
-                <Col lg="3">
-                    <Input
-                        type="select"
-                        value={selectedField}
-                        name="plateType"
-                        onChange={(e) => setSelectedField(e.target.value)}
-                    >
-                        <option key="0" value="">
-                            - Truck Type -
-                        </option>
-                        <option key={1} value="licenseNumber">
-                            Tronton
-                        </option>
-                        <option key={2} value="truckType">
-                            Tronton 2
-                        </option>
-                    </Input>
-                </Col>
-                <Col lg="6">
-                </Col>
-                <Col lg="3">
-                    <Input
-                        value={searchQuery}
-                        name="searchQuery"
-                        placeholder="Search"
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                </Col>
-            </Row>
+
             <br/>
             {/* <DataTable
         title="Arnold Movies"
@@ -100,7 +71,7 @@ export const DriverList = (
                             </td>
                             <td>{driver?.name}</td>
                             <td>{driver?.phoneNumber}</td>
-                            <td>{driver!!.status}</td>
+                            <td>{driver?.status.toString()}</td>
 
                             <td>
                                 <Button
