@@ -14,12 +14,10 @@ query {
 `;
 
 
-export const insertTruck = (name: string, phoneNumber: string) => {
+export const insertDriver = ({driverName, phoneNumber}) => {
 
-    return (
-        gql`
-  mutation {
-    createDriver(input: {name: ${name}, phoneNumber:${phoneNumber}) {
+    return gql` mutation {
+    createDriver(input: {name: ${String('"'+driverName+'"')}, phoneNumber:${String('"'+phoneNumber+'"')}}) {
         id,
         name,
         phoneNumber,
@@ -27,7 +25,5 @@ export const insertTruck = (name: string, phoneNumber: string) => {
         idCard,
         status
     }
-}
-`;
-)
+}`;
 }
