@@ -9,7 +9,7 @@ import {
   useMutation,
   gql
 } from "@apollo/client";
-import {ModalConfirmation} from "../../../../components";
+import { ModalConfirmation, ModalForm} from "../../../../components";
 
 export const Main: React.FC = () => {
   const alert = useAlert();
@@ -65,14 +65,20 @@ export const Main: React.FC = () => {
 
 
         //Modal Confirmation Sample Use
-        <ModalConfirmation
-            isShowing={true}
-            onSubmit={()=>{}}
-            onClose={()=>{}}
-            message="Are you sure wanna delete this carrot ?"
-            cancelButton="Cancel"
-            okButton="Delete"
-        />
+        {/*<ModalConfirmation*/}
+        {/*    isShowing={false}*/}
+        {/*    onSubmit={()=>{}}*/}
+        {/*    onClose={()=>{}}*/}
+        {/*    message="Are you sure wanna delete this carrot ?"*/}
+        {/*    cancelButton="Cancel"*/}
+        {/*    okButton="Delete"*/}
+        {/*/>*/}
+
+        <ModalForm footer={true} isShowing={true} size="2xl" title="Profile">
+
+          adasdasdasd
+
+        </ModalForm>
 
       </div>
     </>
