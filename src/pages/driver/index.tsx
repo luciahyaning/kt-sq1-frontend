@@ -20,7 +20,7 @@ import {
   NavbarText
 } from 'reactstrap';
 import {NavigationBar} from "../../components/navbar";
-const Todo: React.FC = () => {
+const Driver: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,4 +38,4 @@ const Todo: React.FC = () => {
   );
 };
 
-export default Todo;
+export default Driver;
