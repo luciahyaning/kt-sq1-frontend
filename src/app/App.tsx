@@ -1,17 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "styles/global.css";
-import { QueryClientProvider } from "react-query";
+import {QueryClientProvider} from "react-query";
 
-import { queryClient } from "./services";
-import { apolloClient } from "./services";
-import Login from "../pages/login2";
-import { Redirect } from "react-router";
-import ProtectedRoute, { PrivateRoute } from "../utils/protectedRoute";
-import { Switch } from "react-router-dom";
+import {apolloClient, queryClient} from "./services";
+import {Redirect} from "react-router";
+import ProtectedRoute, {PrivateRoute} from "../utils/protectedRoute";
+import {Switch} from "react-router-dom";
 import Todo from "../pages/todo2";
 import TransporterTrucks from "../pages/transporterTrucks";
 import SignUp from "../pages/signup";
-import { ApolloProvider } from '@apollo/client';
+import {ApolloProvider} from '@apollo/client';
+import Login from "../pages/login";
 
 function App(): JSX.Element {
   return (

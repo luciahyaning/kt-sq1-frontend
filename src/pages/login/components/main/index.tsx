@@ -1,69 +1,98 @@
 import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import { useMutation } from "react-query";
+import { Button, Container, Form, InputGroup } from "react-bootstrap";
+// import { useMutation } from "react-query";
 import { useAlert } from "react-alert";
-import { onChangeListener } from "../../../../utils/type";
-import { LoginPayload } from "../../interface/loginPayload";
-import { sigIn } from "../../api/loginApi";
-import {ModalConfirmation} from "../../../../components";
+import { LOGIN } from "../../api/query";
+
+import { useMutation } from "@apollo/client";
+import { LoginPayload } from "../../../login/interface/loginPayload";
 
 export const Main: React.FC = () => {
+  const [login, { data, loading, error }] = useMutation(LOGIN, {
+    errorPolicy: "all",
+  });
   const alert = useAlert();
   const [loginPayload, setLoginPayload] = useState<LoginPayload>();
+  const [checked, setChecked] = useState({
+    shipper: false,
+    transporter: false,
+  });
+  const [role, setRole] = useState<number>(0);
 
-  //mutation for creating new group
-  const registerUserMutation = useMutation(
-    (payload: LoginPayload) => sigIn(payload),
-    {
-      onSuccess: (token) => {
-        localStorage.setItem("token", token.access_token);
-        alert.success("Successfully Login");
-        window.location.href = "/";
-      },
-      onError: (error: any) => alert.success(error.response.data.message),
-    }
-  );
-
-  //button click listener that trigger mutation
-  const onRegisterButtonClick = (e) => {
-    e.preventDefault();
-    registerUserMutation.mutate(loginPayload);
-  };
-
-  //listen name email change and set state
-  const onChangeEmailInputListener: onChangeListener = (e) => {
-    setLoginPayload({ ...loginPayload, username: e.target.value });
-  };
-
-  //listen name password change and set state
-  const onChangePasswordInputListener: onChangeListener = (e) => {
-    setLoginPayload({ ...loginPayload, password: e.target.value });
-  };
-
+  if (data && data.loginUser) {
+    localStorage.setItem("token", data.loginUser.token);
+    alert.success("Successfully Login");
+    window.location.href = "/";
+  }
   return (
-    <div className="text-center py-4" style={{ backgroundColor: "#282c34" }}>
-      <Container>
-        <h3 className="text-white">Login</h3>
-        <Form>
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="email" onChange={onChangeEmailInputListener} />
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={onChangePasswordInputListener}
-          />
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={onRegisterButtonClick}
-          >
-            Submit
-          </Button>
-        </Form>
+    <>
+      {error && error.message}
+      <div>
+        <Container
+          style={{ marginTop: "250px", height: "500px" }}
+          className="w-50 p-3"
+        >
+          <div className="card">
+            <article className="card-body">
+              <h4 className="card-title mb-4 mt-1">Sign in</h4>
+              <form>
+                <InputGroup className="mb-3">
+                  <InputGroup.Radio
+                    aria-label="Checkbox for following text input"
+                    checked={checked.transporter}
+                    onClick={() => {
+                      setRole(1);
+                      setChecked({
+                        shipper: false,
+                        transporter: true,
+                      });
+                    }}
+                  />
+                  <Form.Control
+                    type="text"
+                    disabled={true}
+                    value="Transporter"
+                  />
+                </InputGroup>
 
+                <InputGroup>
+                  <InputGroup.Radio
+                    checked={checked.shipper}
+                    onClick={() => {
+                      setRole(0);
+                      setChecked({
+                        shipper: true,
+                        transporter: false,
+                      });
+                    }}
+                    aria-label="Radio button for following text input"
+                  />
+                  <Form.Control type="text" disabled={true} value="Shipper" />
+                </InputGroup>
+                {/* form-group// */}
 
-
-      </Container>
-    </div>
+                <InputGroup>
+                  <Button
+                    type="submit"
+                    className="btn btn-primary btn-block mt-4"
+                    onClick={() => {
+                      login({
+                        variables: {
+                          role: role,
+                        },
+                      });
+                    }}
+                  >
+                    {" "}
+                    Login
+                  </Button>
+                </InputGroup>
+                {/* form-group// */}
+              </form>
+            </article>
+          </div>
+        </Container>
+      </div>
+    </>
   );
 };
