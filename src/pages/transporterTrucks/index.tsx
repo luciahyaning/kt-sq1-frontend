@@ -35,7 +35,7 @@ const Todo: React.FC = () => {
               <NavLink  to="trucks" >Trucks</NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <NavbarText>Tranporter</NavbarText>
         </Collapse>
       </Navbar>
       <br/>
