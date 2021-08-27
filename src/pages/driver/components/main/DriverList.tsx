@@ -105,7 +105,7 @@ export const DriverList = (
                             <td>
                                 <Button
                                     onClick={() => {
-                                        // onSelectedItem({id, name, tag, description});
+                                        onSelectedItem(driver);
                                     }}
                                 >Update Truck</Button>
                             </td>

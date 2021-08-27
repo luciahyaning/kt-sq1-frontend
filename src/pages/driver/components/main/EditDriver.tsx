@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Input, Button, Alert } from "reactstrap";
 import { useAlert } from "react-alert";
-import { INSERT_TRUCKS } from "../../api/query";
+import { UPDATE_DRIVERS, updateTruck } from "../../api/query";
 import {
   useMutation,
 } from "@apollo/client";
@@ -14,29 +14,27 @@ export const EditDriver = (
 ) => {
   const alert = useAlert();
 
-  const [licenseNumber, setLicenseNumber] = useState("");
-  const [truckType, setTruckType] = useState("");
-  const [plateType, setPlateType] = useState("");
-  const [productionYear, setProductionYear] = useState(0);
-  const [editTruck, { data, loading, error }] = useMutation(INSERT_TRUCKS, {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [id, setId] = useState("");
+  const [editDriver, { data, loading, error }] = useMutation(UPDATE_DRIVERS, {
     errorPolicy: 'all'
   });
 
   useEffect(() => {
     if (selectedItem) {
-      setLicenseNumber(selectedItem.name);
-      setTruckType(selectedItem.tag);
-      setPlateType(selectedItem.description);
+      setName(selectedItem.name);
+      setPhoneNumber(selectedItem.phoneNumber);
+      setId(selectedItem.id);
     }
   }, [selectedItem]);
 
   useEffect(() => {
-    if (data && data.createBussiness) {
+    if (data && data.updateDriver) {
       alert.success("Edit Success");
-      setLicenseNumber("");
-      setTruckType("");
-      setPlateType("");
-      onSubmit();
+      setName("");
+      setPhoneNumber("");
+      setPhoneNumber("");
     }
   }, [data]);
 
@@ -57,11 +55,14 @@ export const EditDriver = (
       <form
         onSubmit={e => {
           e.preventDefault();
-          editTruck({
+          console.log(phoneNumber);
+          console.log(name);
+          console.log(id);
+          editDriver({
             variables: {
-              name: licenseNumber,
-              description: plateType ,
-              tag: truckType
+              id: id,
+              name: name,
+              phoneNumber: phoneNumber,
             }
           })
             .catch(e => {
@@ -70,44 +71,18 @@ export const EditDriver = (
             });
         }}
       >
-        <label>License Number</label>
+        <label>Name</label>
         <Input
-          value={licenseNumber}
+          value={name}
           name="licenseNumber"
-          onChange={(e) => setLicenseNumber(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <br />
-        <label>Plate Type</label>
+        <label>Phone Number</label>
         <Input
-          value={plateType}
+          value={phoneNumber}
           name="plateType"
-          onChange={(e) => setPlateType(e.target.value)}
-        />
-        <br />
-        <label>Truck Type</label>
-        <Input
-          type="select"
-          value={truckType}
-          name="truckType"
-          onChange={(e) => setTruckType(e.target.value)}
-        >
-          <option key="0" value="">
-            - Choose Truck Type -
-          </option>
-          <option key={1} value="yellow">
-            Yellow
-          </option>
-          <option key={2} value="black">
-            Black
-          </option>
-        </Input>
-        <br />
-        <label>Production Year</label>
-        <Input
-          value={productionYear}
-          type="number"
-          name="productionYear"
-          onChange={(e) => setProductionYear(parseInt(e.target.value))}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <br />
         <Button type="submit">Save</Button>

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Alert, Button, FormGroup, FormText, Input, Label} from "reactstrap";
 import {useAlert} from "react-alert";
-import {INSERT_TRUCKS} from "../../api/query";
+import {UPDATE_DRIVERS} from "../../api/query";
 import {useMutation,} from "@apollo/client";
 
 export const InputDriver = (
@@ -15,7 +15,7 @@ export const InputDriver = (
     const [payload, setPayload] = useState({
         driverName: null, phoneNumber: null
     });
-    const [addTruck, {data, loading, error}] = useMutation(INSERT_TRUCKS, {
+    const [addTruck, {data, loading, error}] = useMutation(UPDATE_DRIVERS, {
         errorPolicy: 'all'
     });
 
@@ -24,8 +24,8 @@ export const InputDriver = (
         if (data && data.createBussiness) {
             alert.success("Input Success");
             setLicenseNumber("");
-            setTruckType("");
-            setPlateType("");
+            // setTruckType("");
+            // setPlateType("");
             onSubmit();
         }
     }, [data]);
@@ -44,7 +44,7 @@ export const InputDriver = (
                     </Alert>
                 )
             }
-            <form
+            {/* <form
                 onSubmit={e => {
                     e.preventDefault();
                     addTruck({
@@ -96,7 +96,7 @@ export const InputDriver = (
 
                 <br/>
                 <Button type="submit">Save Driver</Button>
-            </form>
+            </form> */}
         </div>
     );
 }
