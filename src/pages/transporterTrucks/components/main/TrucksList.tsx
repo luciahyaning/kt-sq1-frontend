@@ -32,6 +32,10 @@ export const TrucksList = (
         </thead>
         <tbody>
           {
+            data.allBusinesses.length == 0 &&
+            (<td colSpan={6} className="text-center" >Empty Data</td>)
+          }
+          {
             data.allBusinesses.map(({ id, name, tag, description }: any, key: number) => (
               <tr key={id}>
                 <td>
