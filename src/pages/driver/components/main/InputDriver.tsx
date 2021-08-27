@@ -3,14 +3,12 @@ import {Alert, Button, FormGroup, FormText, Input, Label} from "reactstrap";
 import {useAlert} from "react-alert";
 import {useMutation,} from "@apollo/client";
 import {insertDriver} from "../../api/query";
-
 export const InputDriver = (
     {
         onSubmit
     }
 ) => {
     const alert = useAlert();
-
     const [payload, setPayload] = useState({
         driverName: null, phoneNumber: null
     });
@@ -18,9 +16,7 @@ export const InputDriver = (
         errorPolicy: 'all'
     });
 
-
-    console.log(data)
-
+    // console.log(data)
     useEffect(() => {
         // if (data && data.createBussiness) {
         //     alert.success("Input Success");
@@ -30,7 +26,6 @@ export const InputDriver = (
         //     onSubmit();
         // }
     }, [data]);
-
     return (
         <div>
             {
@@ -45,7 +40,7 @@ export const InputDriver = (
                     </Alert>
                 )
             }
-            {/* <form
+            <form
                 onSubmit={e => {
                     e.preventDefault();
                     onSubmit()
@@ -82,7 +77,6 @@ export const InputDriver = (
                         Please Upload ID Card
                     </FormText>
                 </FormGroup>
-
                 <label>Driver License</label>
                 <FormGroup>
                     <Label for="exampleFile">File</Label>
@@ -91,12 +85,10 @@ export const InputDriver = (
                         Please Upload Driver License
                     </FormText>
                 </FormGroup>
-
                 <br/>
-
                 <br/>
                 <Button type="submit">Save Driver</Button>
-            </form> */}
+            </form>
         </div>
     );
 }

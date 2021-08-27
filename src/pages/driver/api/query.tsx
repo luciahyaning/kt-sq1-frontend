@@ -40,9 +40,7 @@ export const updateTruck = (id: string, name: string, phoneNumber: string) => {
     );
 }
 
-
 export const insertDriver = ({driverName, phoneNumber}) => {
-
     return gql` mutation {
     createDriver(input: {name: ${String('"'+driverName+'"')}, phoneNumber:${String('"'+phoneNumber+'"')}}) {
         id,
