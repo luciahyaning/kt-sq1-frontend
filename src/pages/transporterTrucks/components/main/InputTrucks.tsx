@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Input, Button } from "reactstrap";
+import { Input, Button, Alert } from "reactstrap";
 import { useAlert } from "react-alert";
 import { INSERT_TRUCKS } from "../../api/query";
 import {
@@ -9,7 +9,7 @@ import {
 export const InputTrucks = (
   {
     onSubmit
-   }
+  }
 ) => {
   const alert = useAlert();
 
@@ -27,7 +27,7 @@ export const InputTrucks = (
       setLicenseNumber("");
       setTruckType("");
       setPlateType("");
-      onSubmit();      
+      onSubmit();
     }
   }, [data]);
 
@@ -40,7 +40,9 @@ export const InputTrucks = (
       {
         error &&
         (
-          error.message
+          <Alert color={"danger"}>
+            {error.message}
+          </Alert>
         )
       }
       <form
@@ -53,10 +55,10 @@ export const InputTrucks = (
               tag: plateType
             }
           })
-          .catch(e => {
-            console.log(e);
-            console.log(e.message);
-          });
+            .catch(e => {
+              console.log(e);
+              console.log(e.message);
+            });
         }}
       >
         <label>License Number</label>

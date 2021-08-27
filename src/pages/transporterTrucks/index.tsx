@@ -27,7 +27,7 @@ const Todo: React.FC = () => {
   return (
     <>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <NavbarBrand href="/">LMS</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -35,7 +35,7 @@ const Todo: React.FC = () => {
               <NavLink  to="trucks" >Trucks</NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>Tranporter</NavbarText>
+          <NavbarText>Transporter</NavbarText>
         </Collapse>
       </Navbar>
       <br/>

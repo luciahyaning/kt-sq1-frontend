@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Input, Button } from "reactstrap";
+import { Input, Button, Alert } from "reactstrap";
 import { useAlert } from "react-alert";
 import { INSERT_TRUCKS } from "../../api/query";
 import {
@@ -21,7 +21,6 @@ export const EditTrucks = (
   const [editTruck, { data, loading, error }] = useMutation(INSERT_TRUCKS, {
     errorPolicy: 'all'
   });
-
 
   useEffect(() => {
     if (selectedItem) {
@@ -50,7 +49,9 @@ export const EditTrucks = (
       {
         error &&
         (
-          error.message
+          <Alert color={"danger"}>
+            {error.message}
+          </Alert>
         )
       }
       <form

@@ -23,7 +23,7 @@ export const Main: React.FC = () => {
   return (
     <>
       <Container>
-        <Button onClick={() => { setToggleInsert(!toggleInsert) }}>Create Truck</Button>
+        <Button onClick={() => { setToggleInsert(!toggleInsert) }}>Add Truck</Button>
         <Modal
           isOpen={toggleInsert}
           toggle={() => {
