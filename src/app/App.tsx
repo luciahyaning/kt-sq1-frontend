@@ -9,6 +9,7 @@ import { Redirect } from "react-router";
 import ProtectedRoute, { PrivateRoute } from "../utils/protectedRoute";
 import { Switch } from "react-router-dom";
 import Todo from "../pages/todo2";
+import TransporterTrucks from "../pages/transporterTrucks";
 import SignUp from "../pages/signup";
 import { ApolloProvider } from '@apollo/client';
 
@@ -25,7 +26,10 @@ function App(): JSX.Element {
               <Login />
             </PrivateRoute>
             <ProtectedRoute exact path="/">
-              <Todo />
+              HOME
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/transporter/trucks">
+              <TransporterTrucks />
             </ProtectedRoute>
             <Redirect to="/" />
           </Switch>
